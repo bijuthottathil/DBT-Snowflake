@@ -38,3 +38,18 @@ user (dev username):
 
 Based on my snowflake setup, I provided required details
 
+Above step will create a profile file. To see nano ~/.dbt/profiles.yml
+
+Run Debug  should give below result
+
+![image](https://github.com/user-attachments/assets/663aa5fa-b6d2-4622-94e4-2e62c6a64581)
+
+Connection is successful
+
+If you open VSCODE., you will see many code templates generated automatically
+
+![image](https://github.com/user-attachments/assets/76668624-1619-47c7-b612-7e7529f8eda4)
+
+
+
+
