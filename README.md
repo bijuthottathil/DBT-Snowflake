@@ -15,7 +15,26 @@ python3  -m venv venv_dbt
 
 After activation virtual environment, go to the folder
 
-Create a requirements.ext with required components
+pip install dbt-snowflake
+pip install dbt-core cryptography
+pip install snowflake-connector-python pandas
 
+check dbt version
 
- 
+![image](https://github.com/user-attachments/assets/7fef1797-bd9e-4e36-b943-d19ee1db3489)
+
+Configure dbt for Snowflake
+dbt init my_dbt_project
+cd my_dbt_project
+
+![image](https://github.com/user-attachments/assets/e11e65b2-1382-4e50-8281-eeeec93c8842)
+
+provide below details in prompt
+
+account (https://<this_value>.snowflakecomputing.com): 
+user (dev username): 
+
+![image](https://github.com/user-attachments/assets/8d46e49e-11e7-4d33-b321-59de73f2d903)
+
+Based on my snowflake setup, I provided required details
+
