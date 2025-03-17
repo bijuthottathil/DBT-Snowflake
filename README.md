@@ -50,6 +50,8 @@ If you open VSCODE., you will see many code templates generated automatically
 
 ![image](https://github.com/user-attachments/assets/76668624-1619-47c7-b612-7e7529f8eda4)
 
+![image](https://github.com/user-attachments/assets/c55e006b-25d4-46c2-8a43-27c21fa48bde)
+
 
 For tesing , Creating an Incremental dbt Model
 
