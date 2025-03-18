@@ -174,7 +174,7 @@ Running Dbt Snapshot from terminal
 All 5 records are added in snapshot table
 
 
-#Conclusion- 
+# Conclusion- 
 
 DBT offers several significant advantages when implementing incremental loading and SCD (Slowly Changing Dimension) type loading, streamlining and enhancing the data transformation process.
 
