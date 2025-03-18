@@ -1,6 +1,9 @@
-# DBT-Snowflake using Virtual Environment in Mac
+![image](https://github.com/user-attachments/assets/6f5846db-48dc-4db6-9425-f240b11dd16e)
 
-# Environment - Macbook, VS Code
+
+
+
+# Environment - Mac, VS Code
 
 Created DBT  folder in Volume D
 
