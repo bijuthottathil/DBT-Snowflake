@@ -177,6 +177,65 @@ Running Dbt Snapshot from terminal
 All 5 records are added in snapshot table
 
 
+
+
+# UPSERT EXAMPLE WITH CUSTOMER TABLE
+
+Intent is to load data from CUSTOMERS_INCREMENTAL table . It should support insert and modify , using UPSERT Logic
+
+CREATE OR REPLACE TABLE CUSTOMER (
+    CUSTOMER_ID INT PRIMARY KEY,
+    CUSTOMER_NAME VARCHAR(255),
+    EMAIL VARCHAR(255),
+    UPDATED_AT TIMESTAMP
+);
+
+INSERT INTO CUSTOMER (CUSTOMER_ID, CUSTOMER_NAME, EMAIL, UPDATED_AT) VALUES
+(1, 'Alice Smith', 'alice@example.com', CURRENT_TIMESTAMP),
+(2, 'Bob Johnson', 'bob@example.com', CURRENT_TIMESTAMP),
+(3, 'Charlie Brown', 'charlie@example.com', CURRENT_TIMESTAMP),
+(4, 'David Lee', 'david@example.com', CURRENT_TIMESTAMP),
+(5, 'Eve Wilson', 'eve@example.com', CURRENT_TIMESTAMP);
+select *   from customer
+
+![image](https://github.com/user-attachments/assets/2c613489-daa1-4f7e-a9ed-f2ffa7e4edf9)
+
+
+Then created stg_customers.sql under model-->stage folder
+![image](https://github.com/user-attachments/assets/6f697e4a-5efb-4cb4-a890-4ff111146da2)
+
+
+Then create incrimental sql file under model with upsert logic
+![image](https://github.com/user-attachments/assets/f34c3901-09ea-430c-9790-23525bd5dc11)
+
+Source.yml file also modified to accomodate Customer table name
+
+![image](https://github.com/user-attachments/assets/f38deae8-dac9-442d-96ac-4d55797f41ed)
+
+
+Run DBT Run command to load data from Customer table to incriment table
+
+![image](https://github.com/user-attachments/assets/4e5ff8ee-cabe-4e7e-ad40-dd9e985cfef2)
+
+new table will create in snowflake with initial data
+
+select * from  CUSTOMERS_INCREMENTAL
+
+![image](https://github.com/user-attachments/assets/fef73990-bee8-48f6-99f4-808e894324e2)
+
+Now I am adding 2 new records and updating name of one customer. See the result below
+
+
+update CUSTOMER set customer_name='Super' where customer_id=2;
+INSERT INTO CUSTOMER (CUSTOMER_ID, CUSTOMER_NAME, EMAIL, UPDATED_AT) VALUES
+(6, 'Johnson', 'robert@example.com', '2023-11-06 15:00:00'), 
+(7, 'David Lee', 'david.lee@example.com','2023-11-07 16:00:00'), 
+(8, 'Frank Miller', 'frank@example.com', '2023-11-08 17:00:00');
+
+Now run DBT and see results. You can see 2 new records and one updation
+
+![image](https://github.com/user-attachments/assets/c918f65b-15c2-40b8-b7a1-4589b4986b44)
+
 # Conclusion- 
 
 DBT offers several significant advantages when implementing incremental loading and SCD (Slowly Changing Dimension) type loading, streamlining and enhancing the data transformation process.
