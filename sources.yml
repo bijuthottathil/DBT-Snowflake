@@ -1,0 +1,9 @@
+sources:
+  - name: employee_source                      # Source schema name in Snowflake
+    database: MAGNUMDB             # Snowflake database name
+    schema: MAGNUMSCHEMA                   # Schema containing raw data
+    tables: 
+      - name : employee_details
+      - name : employeesalary
+        loaded_at_field: last_updated
+      - name:  CUSTOMER
