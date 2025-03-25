@@ -36,26 +36,26 @@ jobs:
     - name: dbt deps
       run: |
         source venv/bin/activate
-        dbt deps --project-dir DBT-Snowflake # Adjust if your dbt project is in a subfolder
+        dbt deps --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
 
     - name: dbt run
       run: |
         source venv/bin/activate
-        dbt run --project-dir DBT-Snowflake # Adjust if your dbt project is in a subfolder
+        dbt run --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
 
     - name: dbt test
       run: |
         source venv/bin/activate
-        dbt test --project-dir DBT-Snowflake # Adjust if your dbt project is in a subfolder
+        dbt test --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
 
     - name: dbt docs generate
       run: |
         source venv/bin/activate
-        dbt docs generate --project-dir DBT-Snowflake # Adjust if your dbt project is in a subfolder
+        dbt docs generate --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
 
     - name: dbt docs upload
       if: github.ref == 'refs/heads/main' # Only upload on main branch
       run: |
         source venv/bin/activate
-        dbt docs generate --project-dir DBT-Snowflake # Adjust if your dbt project is in a subfolder
-        dbt docs upload --project-dir DBT-Snowflake # Adjust if your dbt project is in a subfolder
+        dbt docs generate --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
+        dbt docs upload --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
