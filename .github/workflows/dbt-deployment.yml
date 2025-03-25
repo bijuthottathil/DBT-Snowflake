@@ -1,0 +1,60 @@
+name: dbt Snowflake Run
+
+on:
+  push:
+    branches:
+      - main # Or your main branch name
+  pull_request:
+    branches:
+      - main # Or your main branch name
+
+jobs:
+  dbt_run:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10' # Or your required Python version
+
+    - name: Install dbt and Snowflake Adapter
+      run: |
+        python -m venv venv
+        source venv/bin/activate
+        pip install dbt-core dbt-snowflake
+
+    - name: Configure dbt Profiles
+      run: |
+        mkdir -p ~/.dbt
+        echo "${{ secrets.DBT_PROFILES_YML }}" > ~/.dbt/profiles.yml
+
+    - name: dbt deps
+      run: |
+        source venv/bin/activate
+        dbt deps --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
+
+    - name: dbt run
+      run: |
+        source venv/bin/activate
+        dbt run --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
+
+    - name: dbt test
+      run: |
+        source venv/bin/activate
+        dbt test --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
+
+    - name: dbt docs generate
+      run: |
+        source venv/bin/activate
+        dbt docs generate --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
+
+    - name: dbt docs upload
+      if: github.ref == 'refs/heads/main' # Only upload on main branch
+      run: |
+        source venv/bin/activate
+        dbt docs generate --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
+        dbt docs upload --project-dir demo_snowflake_dbt # Adjust if your dbt project is in a subfolder
